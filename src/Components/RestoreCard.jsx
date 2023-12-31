@@ -1,5 +1,5 @@
 import React from 'react'
-import { IMG_URL } from '../Utils/constants'
+import { IMG_URL, STAR_ICON } from '../Utils/constants'
 
 const RestoreCard = ({items}) => {
     const {id,
@@ -13,8 +13,8 @@ const RestoreCard = ({items}) => {
         <>
             <div className="res-card">
                 <img className="res-logo" src={IMG_URL + cloudinaryImageId} alt="" />
-                <h4>{name}</h4>
-                <h5>{avgRating} </h5>
+                <h3>{name}</h3>
+                <h5> <img className='star_icon' src={STAR_ICON} alt="" /> {avgRating} </h5>
                 <p>{cuisines.join(', ')} Star</p>
                 <p>{sla.slaString}</p>
             </div>

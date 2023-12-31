@@ -20,7 +20,6 @@ export const Header = () => {
                 </ul>
             </div>
         </div>
-        <hr className='line' />
         </>
     )
 }
