@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { lazy, useEffect, useState } from 'react'
 import RestoreCard from './RestoreCard'
 import { Link } from 'react-router-dom'
+import useOnlineStatus from './../Utils/useOnlineStatus'
 import {IMG_URL} from './../Utils/constants'
 
 const Body = () => {
@@ -8,18 +9,29 @@ const Body = () => {
     const [filterResturant, setFilterResturant] = useState([])
     const [searchResult, setSearchResult] = useState("")
     const [carousel, setCarousel] = useState([])
-    const name = "Jamam"
+    const name = "zamam";
+
 
     useEffect(()=>{
         fetchData();
     },[])
 
+
+
     const fetchData = async() => {
         const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9801436&lng=77.5685724&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
         const json = await data.json();
-        setRestaurants(json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants);
+        console.log(json);
+        setRestaurants(json.data.cards[5].card.card.gridElements.infoWithStyle.restaurants);
         setCarousel(json.data.cards[0].card.card.gridElements.infoWithStyle.info);
-        setFilterResturant(json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants)
+        setFilterResturant(json.data.cards[5].card.card.gridElements.infoWithStyle.restaurants)
+    }
+
+
+    const onlineStatus = useOnlineStatus();
+
+    if(onlineStatus === false){
+        return <h1>Looks Like You are Offline Please Check your Internet Connection</h1>
     }
 
       return (
