@@ -1,5 +1,5 @@
 import React, { lazy, useEffect, useState } from 'react'
-import RestoreCard from './RestoreCard'
+import RestoreCard,{withColoured} from './RestoreCard'
 import { Link } from 'react-router-dom'
 import useOnlineStatus from './../Utils/useOnlineStatus'
 import {IMG_URL} from './../Utils/constants'
@@ -11,22 +11,23 @@ const Body = () => {
     const [carousel, setCarousel] = useState([])
     const name = "zamam";
 
-
+    
+    
     useEffect(()=>{
         fetchData();
     },[])
-
-
-
+    
+    
+    
     const fetchData = async() => {
         const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9801436&lng=77.5685724&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
         const json = await data.json();
-        console.log(json);
         setRestaurants(json.data.cards[5].card.card.gridElements.infoWithStyle.restaurants);
         setCarousel(json.data.cards[0].card.card.gridElements.infoWithStyle.info);
         setFilterResturant(json.data.cards[5].card.card.gridElements.infoWithStyle.restaurants)
     }
-
+    
+    const PromotedCard = withColoured(Restaurants);
 
     const onlineStatus = useOnlineStatus();
 
@@ -36,21 +37,42 @@ const Body = () => {
 
       return (
         <>
-            <div className="body">
+            <div className="container mx-auto">
                 <div className="name">
-                    <h2>{name}, What's on Your mind?</h2>
+                    <h2 className='text-3xl font-sans font-bold mb-10'>{name}, What's on Your mind?</h2>
                 </div>
-                <div className="carousel">
+                <div className="flex gap-10 flex-wrap justify-center mb-5">
                     {
                             carousel.map((item)=> (
-                            <div key={item.id}>
-                                <img className='img-carousel' src={IMG_URL + item.imageId} alt="" />
+                            <div key={item.id} >
+                                <img className='w-80 cursor-pointer' src={IMG_URL + item.imageId} alt="" />
                             </div>
                         ))
                     }
                 </div>
-                <div className='line'></div>
-                <h2 className="heading">Restaurants with online food delivery in Chennai</h2>
+                <div className='w-full h-1 hidden md:block rounded-lg bg-gray-200 mb-10'></div>
+                <h2 className="text-xl sm:text-3xl  font-bold font-sans mb-10">Restaurants with online food delivery in Chennai</h2>
+                    <div className="flex gap-10 justify-center md:justify-start flex-wrap">
+                    {
+                        filterResturant.map((items)=> (
+                            <Link to={"/restaurant/" + items.info.id} key={items.info.id}>
+                                {items.info.avgRating >= 4.5 ? <PromotedCard items = {items} /> : <RestoreCard items = {items} />}
+                            </Link>
+                        ))
+                    }
+                </div>
+                <div className="btn_div">
+                    <center><button
+                    onClick={fetchData}
+                    className='px-20 py-2 text-md outline outline-1 rounded-sm hover:bg-gray-50 outline-offset-2 mb-5'>Show More</button></center>
+                </div>
+            </div>
+        </>
+    )
+}
+
+export default Body
+
                     {/* <div className="filter">
                         <div className='input-box'>
                             <input type="text" 
@@ -74,23 +96,3 @@ const Body = () => {
                         }}
                         className='btn-search'>Top Rated Resturant</button>
                     </div> */}
-                    <div className="res-container">
-                    {
-                        filterResturant.map((items)=> (
-                            <Link to={"/restaurant/" + items.info.id} key={items.info.id}>
-                                <RestoreCard items = {items} />
-                            </Link>
-                        ))
-                    }
-                </div>
-                <div className="btn_div">
-                    <center><button
-                    onClick={fetchData}
-                    className='show_more'>Show More</button></center>
-                </div>
-            </div>
-        </>
-    )
-}
-
-export default Body
