@@ -30,7 +30,12 @@ const RestaurantMenu = () => {
             </div>
                     <hr className="max-w-[820px] mx-auto my-10 border21 border-gray-300 border-dotted" />
                 <ul className="max-w-[820px] mx-auto bg-gray-100">
-                    {categories.map((item, index)=> <RestaurantCategories showItem = {index === showItem ? true : false} setShowItem = {()=>setShowItem(index)}  key={item?.card?.card?.title}  data={item?.card?.card} />)}
+                    {categories.map((item, index)=> {
+                        return <RestaurantCategories 
+                    showItem = {index === showItem ? true : false} 
+                    setShowItem = {()=>setShowItem(index)}  
+                    key={item?.card?.card?.title}  data={item?.card?.card} />
+                    })}
                 </ul>
         </>
     )

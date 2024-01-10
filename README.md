@@ -39,3 +39,28 @@ import {Components} from 'path';
 
 - Client Side Routing
 - Server Side Routing
+
+# redux Tollkit
+
+    - Install @reduxjs/tollkit and react-redux
+    - Build our store
+    - Connect Our Store to our app
+    - Slice or portion (card)
+    - dispatch (action)
+    - call the reducer fn()
+    - selector
+
+# types of testing (developer)
+
+    - Unit testing
+    - Integration testing
+    - End to End testing
+
+# setting up testing in our app
+
+    - Install React Testing Library
+    - Install Jest
+    - Install Babel dependices
+    - configure Babel
+    - configure Parcel config file to disable default babel transpilation
+    - jest configuration

@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { Header } from './Components/Header';
 import Body from './Components/Body';
@@ -10,7 +10,9 @@ import Card from "./Components/Card";
 import Error from "./Components/Error";
 import { Routes, Route } from "react-router-dom";
 import RestaurantMenu from "./Components/RestaurantMenu";
-
+import UserContext from "./Utils/UserContext";
+import { Provider } from "react-redux";
+import appStore from "./Utils/appStore";
 
 
 // React.createElement => Object => HTMLElement(render) 
@@ -21,20 +23,34 @@ const Grocery = lazy(() => import('./Components/Grocery'))
 const About = lazy(() => import('./Components/About'))
 
 const AppLayout = () => {
+
+    const [userName, setUserName] = useState();
+
+    useEffect(() => {
+        const data = {
+            name: "zamam"
+        }
+        setUserName(data.name)
+    }, [])
+
     return (
         <>
-            <div className="App">
-                <Header />
-                <Routes>
-                    <Route path="/" element={<Body />} />
-                    <Route path="/about" element={<Suspense><About /></Suspense>} />
-                    <Route path="/contact" element={<Contact />} />
-                    <Route path="/grocery" element={<Suspense fallback={<h1>Loading....</h1>}><Grocery /></Suspense>} />
-                    <Route path="/card" element={<Card />} />
-                    <Route path="/restaurant/:resId" element={<RestaurantMenu />} />
-                    <Route path="*" element={<Error />} />
-                </Routes>
-            </div>
+            <Provider store={appStore}>
+                <UserContext.Provider value={{ loggedInUser: userName }}>
+                    <div className="App">
+                        <Header />
+                        <Routes>
+                            <Route path="/" element={<Body />} />
+                            <Route path="/about" element={<Suspense><About /></Suspense>} />
+                            <Route path="/contact" element={<Contact />} />
+                            <Route path="/grocery" element={<Suspense fallback={<h1>Loading....</h1>}><Grocery /></Suspense>} />
+                            <Route path="/card" element={<Card />} />
+                            <Route path="/restaurant/:resId" element={<RestaurantMenu />} />
+                            <Route path="*" element={<Error />} />
+                        </Routes>
+                    </div>
+                </UserContext.Provider>
+            </Provider>
         </>
     )
 }

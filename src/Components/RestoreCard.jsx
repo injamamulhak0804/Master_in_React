@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { IMG_URL, STAR_ICON } from '../Utils/constants'
+import UserContext from '../Utils/UserContext'
 
 const RestoreCard = ({items}) => {
     const {id,
@@ -9,6 +10,8 @@ const RestoreCard = ({items}) => {
           avgRating, 
           sla
           } = items?.info
+
+          const {loggedInUser} = useContext(UserContext);
 
         return(
         <>
@@ -21,6 +24,7 @@ const RestoreCard = ({items}) => {
                 </div>
                 <p className='font-light text-md'>{cuisines.length <= 1 ? cuisines.join(", ") : `${cuisines.slice(0,4).join(", ")}...`}</p>
                 <p className='font-light text-md'>{sla.slaString}</p>
+                <p className='font-light text-md'>{loggedInUser}</p>
             </div>
         </>
     )
