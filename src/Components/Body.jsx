@@ -22,9 +22,9 @@ const Body = () => {
     const fetchData = async() => {
         const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9801436&lng=77.5685724&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
         const json = await data.json();
-        setRestaurants(json.data.cards[5].card.card.gridElements.infoWithStyle.restaurants);
+        setRestaurants(json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants);
         setCarousel(json.data.cards[0].card.card.gridElements.infoWithStyle.info);
-        setFilterResturant(json.data.cards[5].card.card.gridElements.infoWithStyle.restaurants)
+        setFilterResturant(json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants)
     }
     
     const PromotedCard = withColoured(Restaurants);
@@ -45,7 +45,7 @@ const Body = () => {
                     {
                             carousel.map((item)=> (
                             <div key={item.id} >
-                                <img className='w-80 cursor-pointer' src={IMG_URL + item.imageId} alt="" />
+                                <img className='w-60 cursor-pointer' src={IMG_URL + item.imageId} alt="" />
                             </div>
                         ))
                     }
