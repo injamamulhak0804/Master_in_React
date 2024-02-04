@@ -1,9 +1,12 @@
 import React, { useContext } from 'react'
 import { IMG_URL, STAR_ICON } from '../Utils/constants'
 import UserContext from '../Utils/UserContext'
+import Shimmer from "./../Loading/Shimmer"
+import useRestaurantCard from '../Utils/useRestaurantCard'
+
 
 const RestoreCard = ({items}) => {
-    const {id,
+    const {
          name, 
          cloudinaryImageId,
           cuisines, 
@@ -11,8 +14,9 @@ const RestoreCard = ({items}) => {
           sla
           } = items?.info
 
-          const {loggedInUser} = useContext(UserContext);
-
+    const {loggedInUser} = useContext(UserContext);
+    const {filterResturant} = useRestaurantCard();
+    if(filterResturant.length === 0) return <Shimmer/>
         return(
         <>
             <div className="hover:scale-95 select-none hover:shadow-md duration-200 w-[350px] min-h-[400] rounded-lg p-3 flex flex-col gap-y-3">
@@ -24,7 +28,7 @@ const RestoreCard = ({items}) => {
                 </div>
                 <p className='font-light text-md'>{cuisines.length <= 1 ? cuisines.join(", ") : `${cuisines.slice(0,4).join(", ")}...`}</p>
                 <p className='font-light text-md'>{sla.slaString}</p>
-                <p className='font-light text-md'>{loggedInUser}</p>
+                {/* <p className='font-light text-md'>{loggedInUser}</p> */}
             </div>
         </>
     )
@@ -34,10 +38,12 @@ const RestoreCard = ({items}) => {
 export const withColoured = (Restaurants) =>{
     return (props) =>{
         return(
-            <div>
-                <label className='absolute bg-black z-20 text-white px-2 py-1 rounded-lg'>Promoted</label>
+            <>
+            
+                <label data-testid="resCard" className='absolute bg-black z-20 text-white px-2 py-1 rounded-lg'>Promoted</label>
                 <RestoreCard {...props} />
-            </div>
+            </>
+        
         )
     }
 }

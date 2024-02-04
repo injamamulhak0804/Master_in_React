@@ -12,7 +12,7 @@ import { Routes, Route } from "react-router-dom";
 import RestaurantMenu from "./Components/RestaurantMenu";
 import UserContext from "./Utils/UserContext";
 import { Provider } from "react-redux";
-import appStore from "./Utils/appStore";
+import appStore from "./Utils/Redux/appStore";
 
 
 // React.createElement => Object => HTMLElement(render) 

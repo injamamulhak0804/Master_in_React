@@ -8,6 +8,9 @@ const Contact = () =>{
                     <textarea className="border pl-2" placeholder="Message"
                      id="" cols="30" rows="10"></textarea>
                 </div>
+                <div className="mx-auto mt-4">
+                    <button className="bg-yellow-300 px-4 py-2 rounded-lg mx-auto">Submit</button>
+                </div>
             </div>
         </>
     )

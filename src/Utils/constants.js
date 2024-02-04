@@ -5,3 +5,5 @@ export const STAR_ICON = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9Gc
 export const STAR_IN_CATEGORIES = "https://t4.ftcdn.net/jpg/00/24/95/07/360_F_24950732_JQEYlxFnwNcoY6nkfIoa2iqakeUPqkdz.jpg"
 export const DOWN_ARROW = "https://static.thenounproject.com/png/2022881-200.png"
 export const ITEMLIST_IMG = "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/"
+export const LOADER_ICE = "https://assets.stickpng.com/images/61194d88f8fe340004e0d2dc.png"
+export const CART = "https://cdn0.iconfinder.com/data/icons/minimal-set-seven/32/minimal-49-512.png"

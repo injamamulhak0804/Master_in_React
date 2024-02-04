@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../Utils/useRestaurantMenu.";
-import Shimmer from "./Shimmer";
 import RestaurantCategories from "./RestaurantCategories";
 import { STAR_IN_CATEGORIES } from "../Utils/constants";
+import ListShimmer from "../Loading/ListShimmer";
 
 const RestaurantMenu = () => {
     const {resId} = useParams();
     const resInfo = useRestaurantMenu(resId)
-    const [showItem, setShowItem] = useState(0)
+    const [showItem, setShowItem] = useState(false)
 
     
-    if(resInfo === null){return <Shimmer />}
+    if(resInfo === null){return <ListShimmer />}
     const {name, cuisines, avgRatingString} = resInfo?.cards[0]?.card?.card?.info;
     const categories = resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR.cards.filter((c)=> c?.card?.card?.["@type"] == "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory")
     return (
@@ -34,7 +34,8 @@ const RestaurantMenu = () => {
                         return <RestaurantCategories 
                     showItem = {index === showItem ? true : false} 
                     setShowItem = {()=>setShowItem(index)}  
-                    key={item?.card?.card?.title}  data={item?.card?.card} />
+                    key={item?.card?.card?.title}  
+                    data={item?.card?.card} />
                     })}
                 </ul>
         </>
