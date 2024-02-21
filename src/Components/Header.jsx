@@ -12,11 +12,11 @@ export const Header = () => {
 
     return (
         <>
-        <div className="flex justify-between items-center px-10 mb-10">
+        <div className="flex justify-between items-center md:px-10 mb-10">
             <div className="logo-container">
                 <img className="w-32" src={LOGO_URL} alt="" />
             </div>
-            <div className="nav-items">
+            <div className="nav-items hidden md:block">
                 <ul className='flex font-sans items-center text-md font-semibold'>
                     <li className='px-4 py-3 cursor-pointer md:px-10'><Link className='hover:text-yellow-500' to="/">Home</Link></li>
                     <li className='px-4 py-3 cursor-pointer md:px-10'><Link className='hover:text-yellow-500' to="/about">About</Link></li>

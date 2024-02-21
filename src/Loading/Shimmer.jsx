@@ -1,7 +1,7 @@
 const Shimmer = () =>{
     return(
         <>
-            <div className=" select-none bg-slate-200 duration-200 w-[350px] min-h-[400] rounded-lg p-3 flex flex-col gap-y-3">
+            <div className=" select-none bg-slate-200 duration-200 w-[300px] min-h-[350] rounded-lg p-3 flex flex-col gap-y-3">
                 <h3 className='text-xl font-sans font-bold'></h3>
                 <div className='mx-auto mb-5 w-[100%] h-[200px] bg-slate-100'>
                 </div>

@@ -19,20 +19,48 @@ const Body = () => {
         <>
             <div className="container mx-auto">
                 <div className="name">
-                    <h2 className='text-3xl font-sans font-bold mb-10'>{name}, What's on Your mind?</h2>
+                    <h2 className='md:text-3xl text-2xl pl-10 md:pl-5 font-sans font-bold mb-10'>{name}, What's on Your mind?</h2>
                 </div>
 
                 {/* CAROUSEL  */}
-                <div className="flex gap-10 flex-wrap justify-center mb-5">
+                <div className="flex gap-10 mb-5 max-w-[85%] mx-auto overflow-x-auto">
                     {
                             carousel.map((item)=> (
-                            <div key={item.id} >
-                                <img className='w-52 cursor-pointer' src={IMG_URL + item.imageId} alt="" />
+                            <div key={item.id} className='w-screen' >
+                                <img className='min-w-36 cursor-pointer' src={IMG_URL + item.imageId} alt="" />
                             </div>
                         ))
                     }
                 </div>
-                <div className='w-full h-1 hidden md:block rounded-lg bg-gray-200 mb-10'></div>
+                <div className='w-[85%] mx-auto h-1 hidden md:block rounded-lg bg-gray-200 mb-10'></div>
+
+                    {/* RENDER CARDS  */}
+
+                <h2 className="text-xl sm:text-3xl pl-5 font-bold font-sans mb-10">Restaurants with online food delivery in Chennai</h2>
+                    <div className="flex gap-10 justify-center flex-wrap">
+                    {
+                        filterResturant.map((items)=> (
+                            <Link to={"/restaurant/" + items.info.id} key={items.info.id}>
+                                {items.info.avgRating >= 4.5 ? <PromotedCard items = {items} /> : <RestoreCard items = {items} />}
+                            </Link>
+                        ))
+                    }
+                </div>
+                <div className="btn_div my-10">
+                    <center><button
+                    className='px-20 py-2 text-md outline outline-1 rounded-sm hover:bg-gray-50 outline-offset-2 mb-5'>Show More</button></center>
+                </div>
+            </div>
+        </>
+    )
+}
+
+export default Body       
+
+
+
+
+
 
                 {/* FILTER FUNCTION  */}
 
@@ -60,26 +88,3 @@ const Body = () => {
                         }}
                        className='font-semibold px-6 py-2 bg-yellow-300 rounded-lg'>Top Rated Resturant</button>
                     </div> */}
-
-                    {/* RENDER CARDS  */}
-
-                <h2 className="text-xl sm:text-3xl  font-bold font-sans mb-10">Restaurants with online food delivery in Chennai</h2>
-                    <div className="flex gap-10 justify-center md:justify-start flex-wrap">
-                    {
-                        filterResturant.map((items)=> (
-                            <Link to={"/restaurant/" + items.info.id} key={items.info.id}>
-                                {items.info.avgRating >= 4.5 ? <PromotedCard items = {items} /> : <RestoreCard items = {items} />}
-                            </Link>
-                        ))
-                    }
-                </div>
-                <div className="btn_div my-5">
-                    <center><button
-                    className='px-20 py-2 text-md outline outline-1 rounded-sm hover:bg-gray-50 outline-offset-2 mb-5'>Show More</button></center>
-                </div>
-            </div>
-        </>
-    )
-}
-
-export default Body        

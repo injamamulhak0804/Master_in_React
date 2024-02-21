@@ -19,7 +19,7 @@ const RestoreCard = ({items}) => {
     if(filterResturant.length === 0) return <Shimmer/>
         return(
         <>
-            <div className="hover:scale-95 select-none hover:shadow-md duration-200 w-[350px] min-h-[400] rounded-lg p-3 flex flex-col gap-y-3">
+            <div className="hover:scale-95 select-none hover:shadow-md duration-200 w-[300px] min-h-[350] rounded-lg p-3 flex flex-col gap-y-3">
                 <img className="w-full h-[200] object-cover rounded-lg" src={IMG_URL + cloudinaryImageId} alt="" />
                 <h3 className='text-xl font-sans font-bold'>{name.length <= 15 ? name : `${name.slice(0,25)}...`}</h3>
                 <div className='flex  gap-1 items-center'>
